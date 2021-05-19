@@ -1,1 +1,24 @@
-// TODO
+.headerContainer {
+  height: 5rem;
+}
+
+.headerContent {
+  max-width: 1120px;
+  height: 8rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+
+  display: flex;
+  align-items: center;
+
+  link {
+    margin-left: 1rem;
+    font-size: 1.625rem;
+
+    span {
+      color: var(--pink);
+      margin-left: 0.25rem;
+    }
+  }
+
+}
