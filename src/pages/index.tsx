@@ -49,7 +49,7 @@ export default function Home({ postsPagination }: HomeProps) {
     const newPost = postResult.results.map(post => {
       return {
         uid: post.uid,
-        first_publication_date: format(new Date(post.last_publication_date), 'dd MMM yyyy', {locale: ptBR}),
+        first_publication_date: post.first_publication_date,
         data: {
           slug: post.uid,
           title: post.data.title,
@@ -67,15 +67,15 @@ export default function Home({ postsPagination }: HomeProps) {
     <>
       <Header />
 
-      <main className={styles.container}>
+      <main className={commonStyles.container}>
         <div className={styles.posts}>
           {posts.map(post => (
-            <Link key={post.uid} href={`/posts/${post.uid}`}>
+            <Link key={post.uid} href={`/post/${post.uid}`}>
               <a>
                 <strong>{post.data.title}</strong>
                 <p>{post.data.subtitle}</p>
                 <div className={styles.infoContainer}>
-                  <time><FaCalendar className={styles.icon}/>{post.first_publication_date} </time>
+                  <time><FaCalendar className={styles.icon}/>{format(new Date(post.first_publication_date), 'dd MMM yyyy', {locale: ptBR})}</time>
                   <span><FaUser className={styles.icon}/>{post.data.author}</span>
                 </div>
               </a>
@@ -104,9 +104,8 @@ export const getStaticProps = async () => {
   const results = postsResponse.results.map(post => {
     return {
       uid: post.uid,
-      first_publication_date: format(new Date(post.last_publication_date), 'dd MMM yyyy', {locale: ptBR}),
+      first_publication_date: post.first_publication_date,
       data: {
-        slug: post.uid,
         title: post.data.title,
         subtitle: post.data.subtitle,
         author: post.data.author,
